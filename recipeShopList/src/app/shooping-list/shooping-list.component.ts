@@ -21,6 +21,9 @@ private  subscription:Subscription
    this.ingredients=ingredients;
     });
   }
+  onEdit(index:number){
+    this.slService.Edit.next(index);
+  }
   ngOnDestroy():void{
     this.subscription.unsubscribe();
   }
