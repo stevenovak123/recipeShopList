@@ -9,7 +9,5 @@ export class AppComponent {
   title = 'recipeShopList';
   loadedFeature='recipe';
 
-  onNavigate(feature:string){
-    this.loadedFeature=feature;
-  }
+  
 }
