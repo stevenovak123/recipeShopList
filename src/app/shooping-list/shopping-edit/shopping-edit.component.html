@@ -24,7 +24,8 @@
             <div class="col-xs-12">
                 <button type="submit" class="btn btn-success"[disabled]="!f.valid">{{editMode ? 'Update': 'Add'}}</button>
                 
-                <button type="button" class="btn btn-danger">delete</button>
+                <button #ngIf="editMode"
+                type="button" class="btn btn-danger"(click)="onDelete()">delete</button>
                 
                 <button type="button" class="btn btn-primary" (click)="onClear()">Clear</button>
             </div>
