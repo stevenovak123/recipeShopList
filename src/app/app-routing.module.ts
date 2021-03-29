@@ -6,7 +6,8 @@ import { RecipesComponent } from './recipes/recipes.component';
  import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-const appRoutes: Routes = [{path: '', redirectTo: '/recipes', pathMatch:'full'},{ path: 'recipes', component: RecipesComponent, children: [
+const appRoutes: Routes = [{path: '', redirectTo: '/recipes', pathMatch:'full'},
+{ path: 'recipes', component: RecipesComponent, children: [
   {path:'',component: RecipeLandComponent},
   {path:'new',component: RecipeEditComponent},
   {path:':id',component: RecipeDetailComponent},
