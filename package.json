@@ -26,6 +26,7 @@
     "@angular/platform-browser-dynamic": "~11.2.1",
     "@angular/router": "~11.2.1",
     "bootstrap": "^3.4.1",
+    "enhanced-resolve": "^3.3.0",
     "express": "^4.17.1",
     "jquery": "^3.6.0",
     "nodeom": "0.0.1",
