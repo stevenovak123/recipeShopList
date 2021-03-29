@@ -57,7 +57,7 @@ Rform: FormGroup;
       'name':new FormControl(RName),
       'ImgP':new FormControl(RImg),
       'Des':new FormControl(RDes),
-      'ing': Ringredients
+      'ingredients': Ringredients
     });
 
   }
