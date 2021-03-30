@@ -37,10 +37,11 @@
             </div>
             <div class="row">
                 <label>Ingredients</label>
-                <div class="col-xs-12" formArrayName="Ingredients">
+                <div class="col-xs-12" formArrayName="ingredient">
                   <div class="row"
-                  *ngFor="let ingredientCtrl of controls; let i = index"
-                  [formGroupName]="i" >
+                  style="margin: top 10px;"
+                  *ngFor="let ingredientCtrl of control; let i = index"
+                  [formGroupName]='i' >
                       <div class="col-xs-8">
                           <input type="text" class="form-control"
                           formControlName="name">
@@ -52,14 +53,24 @@
                         <button name="" id="" class="btn btn-danger">X</button>
                     </div>     
             </div>
-            <br>
-            </div></div>
             <div class="row">
+                <hr>
                 <div class="col-xs-12">
-                    <button type="submit" class="btn btn-success">Save</button>
-                    <button type="submit" class="btn btn-danger">Cancel</button>
+                    <button 
+                    type="button" class="btn btn-success"
+                    style="margin: top 10px;margin-bottom: 10px;"
+                    (click)="addIng()">Add Ingredient</button>
                 </div>
             </div>
+            <br>
+            </div></div>
+            
+          <div class="row">
+                <div class="col-xs-12">
+                    <button type="submit" class="btn btn-success"[disabled]="!Rform.valid">Save</button>
+                    <button type="submit" class="btn btn-danger" style="margin-left:10px; ;">Cancel</button>
+                </div>
+            </div>   
         </form>
     </div>
 </div>

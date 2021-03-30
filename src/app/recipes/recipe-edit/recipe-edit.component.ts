@@ -1,6 +1,6 @@
 import { RecipeService } from './../recipe.service';
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({
@@ -24,9 +24,17 @@ Rform: FormGroup;
     });
 
 
-  }  get controls() { // a getter!
-    return (<FormArray>this.Rform.get('ingredients')).controls;
+  }  get control() { 
+    return (<FormArray>this.Rform.get('ingredient')).controls;
   }
+  addIng(){
+    (<FormArray>this.Rform.get('ingredient')).push(
+      new FormGroup({
+        'name':new FormControl(null,Validators.required),
+        'amount': new FormControl(null,[
+          Validators.required,Validators.pattern(/^[1-9]+[0-9]*$/)] )
+    })
+    )}
 
   onSubmit(){
 
@@ -41,12 +49,14 @@ Rform: FormGroup;
       RName=recipe.name;
       RImg=recipe.imagePath;
       RDes=recipe.description;
-      if(recipe['ingredients']){
+      if(recipe['ingredient']){
         
         for(let ingredient of recipe.ingredient){
           Ringredients.push(new FormGroup({
             'name': new FormControl(ingredient.name),
-            'amount': new FormControl(ingredient.amount)
+            'amount': new FormControl(ingredient.amount,[
+              Validators.required,Validators.pattern(/^[1-9]+[0-9]*$/)
+          ])
 
           })
           );
@@ -54,10 +64,10 @@ Rform: FormGroup;
       }
     }
     this.Rform=new FormGroup({
-      'name':new FormControl(RName),
-      'ImgP':new FormControl(RImg),
-      'Des':new FormControl(RDes),
-      'ingredients': Ringredients
+      'name':new FormControl(RName,Validators.required),
+      'ImgP':new FormControl(RImg,Validators.required),
+      'Des':new FormControl(RDes,Validators.required),
+      'ingredient': Ringredients
     });
 
   }
