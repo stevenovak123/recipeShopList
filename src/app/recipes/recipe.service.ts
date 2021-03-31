@@ -4,12 +4,14 @@ import { ShoppingListService } from './../shooping-list/shopping-list.service';
 import { Injectable } from '@angular/core';
 import { Ingredient } from '../shared/ingredient.model';
 import { Recipe } from './recipe.model';
+import { Subject } from 'rxjs';
 @Injectable()
 export class RecipeService{
 
+ RChanged= new Subject<Recipe[]>();
    private recipes: Recipe[]= [
         new Recipe('Pizza','Pizza with cheese','https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/delish-homemade-pizza-horizontal-1542312378.png?crop=1.00xw:1.00xh;0,0&resize=768:*',
-        [
+        [ 
            new Ingredient('Wheat',2),
            new Ingredient('Pepperoni',8)
         ]),
@@ -22,6 +24,15 @@ export class RecipeService{
 constructor(private slService: ShoppingListService){
 
 }
+addRecipe(recipe: Recipe){
+   this.recipes.push(recipe);
+   this.RChanged.next(this.recipes.slice());
+}
+updateRecipe(index: number, newRecipe:Recipe){
+   this.recipes[index] = newRecipe;
+   this.RChanged.next(this.recipes.slice());
+}
+
 getRecipes(){
     return this.recipes.slice();
  }
