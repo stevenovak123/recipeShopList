@@ -42,5 +42,9 @@ getRecipes(){
  addIngredientsToShoppingList(ingredient:Ingredient[]){
     this.slService.addIngredients(ingredient);
  }
+ deleteRecipe(index :number){
+    this.recipes.splice(index,1);
+    this.RChanged.next(this.recipes.slice());
+ }
 
 }

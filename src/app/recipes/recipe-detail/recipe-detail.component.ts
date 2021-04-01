@@ -29,4 +29,8 @@ onAddToShoppingList(){
 onEditRecipe(){
   this.router.navigate(['edit'],{relativeTo:this.route})
 }
+Delete(){
+  this.recipeService.deleteRecipe(this.id);
+  this.router.navigate(['/recipes']);
+}
 }

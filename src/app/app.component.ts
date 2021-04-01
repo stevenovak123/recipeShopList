@@ -9,5 +9,5 @@ export class AppComponent {
   title = 'recipeShopList';
   loadedFeature='recipe';
 
-  
+ 
 }
