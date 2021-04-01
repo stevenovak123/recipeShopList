@@ -85,7 +85,7 @@ cancel(){
     }
     this.Rform = new FormGroup({
       'name': new FormControl(RName, Validators.required),
-      'ImgP': new FormControl(RImg, Validators.required),
+      'imagePath': new FormControl(RImg, Validators.required),
       'description': new FormControl(RDescription, Validators.required),
       'ingredient': Ringredients
     });
