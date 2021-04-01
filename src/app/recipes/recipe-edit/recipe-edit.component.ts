@@ -91,5 +91,8 @@ cancel(){
     });
 
   }
+  onDelete(index: number){
+    (<FormArray>this.Rform.get('ingredient')).removeAt(index);
+  }
 
 }
