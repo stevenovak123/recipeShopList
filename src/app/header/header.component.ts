@@ -1,3 +1,4 @@
+
 import { Component } from '@angular/core';
 import { DataStorageService } from '../shared/data-storage.service';
 
@@ -12,7 +13,7 @@ Save(){
   this.datastorage.storeRecipes();
 }
 fetch(){
-  this.datastorage.fetchRecipes();
+  this.datastorage.fetchRecipes().subscribe();
 }
 }
   

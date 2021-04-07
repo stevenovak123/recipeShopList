@@ -9,18 +9,8 @@ import { Subject } from 'rxjs';
 export class RecipeService{
 
  RChanged= new Subject<Recipe[]>();
-   private recipes: Recipe[]= [
-        new Recipe('Pizza','Pizza with cheese','https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/delish-homemade-pizza-horizontal-1542312378.png?crop=1.00xw:1.00xh;0,0&resize=768:*',
-        [ 
-           new Ingredient('Wheat',2),
-           new Ingredient('Pepperoni',8)
-        ]),
-        
-        new Recipe('Burrito','Wrap with rice,beans and guac','https://www.rvcj.com/wp-content/uploads/2019/10/Burrito.jpeg',[
-         new Ingredient('Avocado',2),
-         new Ingredient('Wrap',1)
-      ]),
-      ];
+   
+ private recipes: Recipe[]=[];
 constructor(private slService: ShoppingListService){
 
 }
