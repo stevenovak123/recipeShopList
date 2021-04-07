@@ -46,5 +46,9 @@ getRecipes(){
     this.recipes.splice(index,1);
     this.RChanged.next(this.recipes.slice());
  }
+ setRecipes(recipes :Recipe[]){
+    this.recipes=recipes;
+    this.RChanged.next(this.recipes.slice());
+ }
 
 }

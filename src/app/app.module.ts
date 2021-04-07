@@ -15,6 +15,7 @@ import { ShoppingEditComponent } from './shooping-list/shopping-edit/shopping-ed
 import { RecipeLandComponent } from './recipes/recipe-land/recipe-land.component';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import { RecipeService } from './recipes/recipe.service';
+import { HttpClientModule } from '@angular/common/http'
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,7 +34,8 @@ import { RecipeService } from './recipes/recipe.service';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
     
   ],
   providers: [ShoppingListService,RecipeService],
