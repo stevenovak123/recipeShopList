@@ -10,12 +10,13 @@ import {
   tap
 } from "rxjs/operators";
 import {
-  Subject,
+    BehaviorSubject,
   throwError
 } from "rxjs";
 import {
   User
 } from "./user.model";
+import { Router } from "@angular/router";
 
 export interface AuthResponse {
   kind: string;
@@ -32,11 +33,12 @@ export interface AuthResponse {
 })
 
 export class AuthService {
-  user = new Subject < User > ();
+  user = new BehaviorSubject<User>(null);
+  private tokenTimer:any;
 
 
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,private router:Router) {}
 
   signup(email: string, password: String) {
     return this.http.post < AuthResponse > ('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyC1EfkT2eD4mxyaDQHLphgZ20w8SC3-liI', {
@@ -44,14 +46,37 @@ export class AuthService {
         password: password,
         returnSecureToken: true
       })
-      .pipe(catchError(this.handleError), tap(resData => {
-        this.handleAuth(resData.email, resData.localId, resData.idToken, +resData.expiresIn);
-
-      }));
-  }
+      .pipe(catchError(this.handleError), 
+      tap(resData => {
+        this.handleAuth(
+        resData.email,
+        resData.localId,
+        resData.idToken,
+        +resData.expiresIn
+        );
+      })
+  );
+}
+autoLogin(){
+    const userData:{
+        email: string,
+        id: string,
+        _token: string,
+        _tokenExpirationDate:string;
+    }=JSON.parse(localStorage.getItem('userData'));
+    if(!userData){
+        return;
+    }
+    const loadedUser= new User(userData.email,userData.id,userData._token,new Date(userData._tokenExpirationDate));
+    if(loadedUser.token){
+        this.user.next(loadedUser);
+        const exiprationDuration=new Date(userData._tokenExpirationDate).getTime()-new Date().getTime();
+        this.autoLogout(exiprationDuration);
+    }
+}
 
   login(email: string, password: string) {
-    return this.http.post < AuthResponse > ('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key==AIzaSyC1EfkT2eD4mxyaDQHLphgZ20w8SC3-liI', {
+    return this.http.post < AuthResponse > ('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyC1EfkT2eD4mxyaDQHLphgZ20w8SC3-liI', {
       email: email,
       password: password,
       returnSecureToken: true
@@ -70,11 +95,25 @@ export class AuthService {
     const user = new User(email, userId, token, expirationDate);
 
     this.user.next(user);
+    this.autoLogout(expiresIn *1000);
+    localStorage.setItem('userData',JSON.stringify(user));
 
   }
+  logOut(){
+      this.user.next(null);
+      this.router.navigate(['/auth']);
+      localStorage.removeItem('userData');
+      if(this.tokenTimer){
+          clearTimeout(this.tokenTimer);
+      }
+this.tokenTimer=null;
+  }
+  autoLogout(exiprationDuration:number){
+     this.tokenTimer= setTimeout(()=>{
+          this.logOut();
+      } ,exiprationDuration);
 
-
-
+  }
 
   private handleError(errorRes: HttpErrorResponse) {
     let errorMessage = 'An unknown Error';
