@@ -6,6 +6,7 @@ import { ShoopingListComponent } from './shooping-list/shooping-list.component';
 import { RecipesComponent } from './recipes/recipes.component';
  import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthComponent } from './auth/auth.component';
 
 const appRoutes: Routes = [{path: '', redirectTo: '/recipes', pathMatch: 'full'},
 { path:'recipes', component: RecipesComponent, children: [
@@ -16,6 +17,7 @@ const appRoutes: Routes = [{path: '', redirectTo: '/recipes', pathMatch: 'full'}
   
 ]},
 { path:'shooping-list', component: ShoopingListComponent},
+{path:'auth',component:AuthComponent}
 ];
 
 @NgModule({

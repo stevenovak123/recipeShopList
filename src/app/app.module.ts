@@ -15,7 +15,9 @@ import { ShoppingEditComponent } from './shooping-list/shopping-edit/shopping-ed
 import { RecipeLandComponent } from './recipes/recipe-land/recipe-land.component';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import { RecipeService } from './recipes/recipe.service';
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule } from '@angular/common/http';
+import { AuthComponent } from './auth/auth.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,8 +30,9 @@ import { HttpClientModule } from '@angular/common/http'
     RecipeItemComponent,
     DropdownDirective,
     RecipeLandComponent,
-    RecipeEditComponent
-  ],
+    RecipeEditComponent,
+    AuthComponent
+    ],
   imports: [
     BrowserModule,
     AppRoutingModule,
