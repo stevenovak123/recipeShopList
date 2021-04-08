@@ -4,10 +4,10 @@
         <a routerLink="/" class="navbar-brand">Recipe Book</a>
       </div>
       <div class="collapse navbar-collapse">
-        <ul class="nav navbar-nav" *ngIf="isAuthenticated">
-          <li routerLinkActive="active"><a routerLink="/recipes" >Recipes</a></li>
+        <ul class="nav navbar-nav" >
+          <li routerLinkActive="active" *ngIf="isAuthenticated"><a routerLink="/recipes" >Recipes</a></li>
           <li routerLinkActive="active"><a routerLink="/auth" *ngIf="!isAuthenticated">Authenticate</a></li>
-          <li routerLinkActive="active"><a routerLink="/shooping-list" *ngIf="isAuthenticated">Shopping List</a></li>
+          <li routerLinkActive="active"><a routerLink="/shooping-list">Shopping List</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li *ngIf="isAuthenticated">
