@@ -17,6 +17,7 @@ import {
   User
 } from "./user.model";
 import { Router } from "@angular/router";
+import{ environment } from '../../environments/environment'
 
 export interface AuthResponse {
   kind: string;
@@ -41,7 +42,7 @@ export class AuthService {
   constructor(private http: HttpClient,private router:Router) {}
 
   signup(email: string, password: String) {
-    return this.http.post < AuthResponse > ('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyC1EfkT2eD4mxyaDQHLphgZ20w8SC3-liI', {
+    return this.http.post < AuthResponse > ('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key='+ environment.firebaseAPIkey, {
         email: email,
         password: password,
         returnSecureToken: true
@@ -76,7 +77,7 @@ autoLogin(){
 }
 
   login(email: string, password: string) {
-    return this.http.post < AuthResponse > ('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyC1EfkT2eD4mxyaDQHLphgZ20w8SC3-liI', {
+    return this.http.post < AuthResponse > ('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key='+environment.firebaseAPIkey, {
       email: email,
       password: password,
       returnSecureToken: true
