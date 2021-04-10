@@ -54,4 +54,7 @@ errorMessage=>{
 
   form.reset();
 }
+onHandleError(){
+  this.error=null;
+}
 }
